@@ -1,0 +1,50 @@
+.user-dashboard {
+  max-width: 800px; /* Limit the width for better readability */
+  margin: 20px auto; /* Center the content */
+  padding: 20px; /* Padding for content */
+  background: #282c34; /* Dark background color */
+  color: #fff; /* White text color */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+  font-family: 'Arial', sans-serif; /* Font style */
+}
+
+h2 {
+  text-align: center; /* Center the main title */
+  font-size: 2.5em; /* Increase the font size */
+  margin-bottom: 20px; /* Space below title */
+  color: #ffcc00; /* Gold color for the title */
+}
+
+h3 {
+  color: #ffcc00; /* Gold color for section titles */
+  margin-bottom: 15px; /* Space below section title */
+}
+
+.event-list {
+  display: flex; /* Use flexbox for layout */
+  flex-direction: column; /* Stack event cards vertically */
+}
+
+.event-card {
+  background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+  border: 1px solid #ffcc00; /* Gold border for event cards */
+  border-radius: 8px; /* Rounded corners */
+  padding: 15px; /* Padding */
+  margin-bottom: 15px; /* Space below each event card */
+  transition: transform 0.3s; /* Transition for hover effect */
+}
+
+.event-card:hover {
+  transform: scale(1.02); /* Slightly increase size on hover */
+  background: rgba(255, 255, 255, 0.2); /* Lighten background on hover */
+}
+
+.event-card h4 {
+  margin: 0; /* Remove margin */
+  color: #ffcc00; /* Gold color for event titles */
+}
+
+.event-card p {
+  margin: 5px 0; /* Space between paragraphs */
+}

@@ -1,0 +1,61 @@
+/* General Styles */
+.about-page {
+    max-width: 800px; /* Limit the width for better readability */
+    margin: 20px auto; /* Center the content */
+    padding: 30px; /* Padding for content */
+    font-family: 'Arial', sans-serif; /* Font style */
+    color: #fff; /* Text color */
+    background: #282c34; /* Changed to a dark color for the background */
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+}
+
+/* Main Title */
+h1 {
+    text-align: center; /* Center the main title */
+    font-size: 2.5em; /* Increase the font size */
+    margin-bottom: 20px; /* Space below title */
+    text-transform: uppercase; /* Uppercase letters */
+}
+
+/* Section Styles */
+h2 {
+    color: #ffcc00; /* Gold color for section titles */
+    margin-top: 30px; /* Space above section titles */
+}
+
+.intro {
+    font-size: 1.2em; /* Slightly larger font for intro text */
+    text-align: center; /* Centered text */
+    margin-bottom: 20px; /* Space below intro */
+}
+
+/* Mission and Vision Styles */
+.mission, .vision {
+    background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+    border-radius: 8px; /* Rounded corners */
+    padding: 15px; /* Padding */
+    margin-bottom: 20px; /* Space below each section */
+}
+
+/* Team Styles */
+.team {
+    background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+    border-radius: 8px; /* Rounded corners */
+    padding: 15px; /* Padding */
+}
+
+.team ul {
+    list-style-type: none; /* Remove default bullet points */
+    padding: 0; /* Remove padding */
+}
+
+.team li {
+    padding: 5px; /* Padding for list items */
+    transition: background 0.3s; /* Transition for hover effect */
+}
+
+.team li:hover {
+    background: rgba(255, 255, 255, 0.2); /* Light hover effect */
+    border-radius: 5px; /* Rounded corners on hover */
+}

@@ -1,0 +1,58 @@
+/* App.css */
+
+/* Set a global font and background */
+body {
+  font-family: Arial, sans-serif; /* Change to your preferred font */
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+  background-color: #f4f4f4; /* Light grey background */
+  color: #333; /* Darker text color for readability */
+}
+
+/* Container for the main content */
+.container {
+  max-width: 1200px; /* Max width for larger screens */
+  margin: 20px auto; /* Center the container with margin */
+  padding: 20px; /* Add some padding inside the container */
+  background-color: white; /* White background for the content area */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  border-radius: 5px; /* Slightly rounded corners */
+}
+
+/* Headings */
+h1, h2, h3 {
+  margin-top: 0; /* Remove top margin */
+}
+
+/* Link styles */
+a {
+  color: #4CAF50; /* Change link color */
+  text-decoration: none; /* Remove underline from links */
+}
+
+a:hover {
+  text-decoration: underline; /* Underline on hover */
+}
+
+/* Button styles */
+button {
+  padding: 10px 15px; /* Padding for buttons */
+  background-color: #4CAF50; /* Button background color */
+  color: white; /* Button text color */
+  border: none; /* Remove border */
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s; /* Transition for background color */
+}
+
+button:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .container {
+    margin: 10px; /* Reduce margin on smaller screens */
+    padding: 10px; /* Reduce padding */
+  }
+}

@@ -1,0 +1,38 @@
+.footer {
+  background-color: #3f51b5; /* Deep purple background */
+  color: white;
+  text-align: center;
+  padding: 10px 0; /* Small padding */
+  position: relative; /* Stay at the bottom without fixed positioning */
+}
+
+.footer-content {
+  max-width: 1200px; /* Optional: limit the width for larger screens */
+  margin: 0 auto; /* Center the footer content */
+}
+
+.footer p {
+  margin: 5px 0; /* Small margin for the copyright text */
+}
+
+.footer-links {
+  list-style: none; /* Remove bullet points */
+  padding: 0; /* Remove padding */
+  display: flex; /* Use flexbox for horizontal alignment */
+  justify-content: center; /* Center the links */
+  margin: 5px 0; /* Small margin for the link list */
+}
+
+.footer-links li {
+  margin: 0 10px; /* Space between links */
+}
+
+.footer-links a {
+  color: white; /* Link color */
+  text-decoration: none; /* Remove underline */
+  transition: color 0.3s; /* Smooth transition for hover effect */
+}
+
+.footer-links a:hover {
+  color: #ff9800; /* Change color on hover */
+}

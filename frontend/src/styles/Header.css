@@ -1,0 +1,35 @@
+/* Header.css */
+
+.header {
+  display: flex; /* Use flexbox for layout */
+  justify-content: space-between; /* Space between logo and navigation */
+  align-items: center; /* Center items vertically */
+  background-color: #333; /* Dark background */
+  padding: 10px 20px; /* Padding around header */
+  color: white; /* Text color */
+}
+
+.logo h1 {
+  margin: 0; /* Remove default margin */
+}
+
+.nav ul {
+  list-style: none; /* Remove bullet points */
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+  display: flex; /* Use flexbox for horizontal list */
+}
+
+.nav ul li {
+  margin: 0 15px; /* Space between list items */
+}
+
+.nav a {
+  color: white; /* Text color for links */
+  text-decoration: none; /* Remove underline */
+  font-weight: bold; /* Bold text */
+}
+
+.nav a:hover {
+  text-decoration: underline; /* Underline on hover */
+}
