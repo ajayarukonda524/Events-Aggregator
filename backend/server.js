@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
+const User = require('./models/User');
 const authRoutes = require('./routes/authRoutes'); // adjust the path as necessary
 
 const app = express();
