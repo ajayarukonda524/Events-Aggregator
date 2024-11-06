@@ -56,3 +56,12 @@ button:hover {
     padding: 10px; /* Reduce padding */
   }
 }
+/* Add this to your CSS file */
+.custom-notification {
+  padding: 10px;
+  background-color: #4caf50; /* Green */
+  color: white;
+  border-radius: 5px;
+  margin: 10px 0;
+}
+

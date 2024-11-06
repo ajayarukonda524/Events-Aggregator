@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const path = require('path');
 const User = require('./models/User');
 const authRoutes = require('./routes/authRoutes'); // adjust the path as necessary
+require('dotenv').config();
+
 
 const app = express();
 app.use(express.json());

@@ -1,6 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
-const User = require('./models/User'); // Adjust the path as necessary
+const User = require('../models/User'); // Adjust the path as necessary
 const router = express.Router();
 
 // Register a new user
