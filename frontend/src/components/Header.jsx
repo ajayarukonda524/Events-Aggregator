@@ -1,41 +1,49 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from '../images/logo.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../styles/Header.css';
 
-const Header = ({ setSearchTerm }) => {
+const Header = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userType, setUserType] = useState(null);
+  const navigate = useNavigate();
 
-  // Check if the user is logged in
-  const isLoggedIn = localStorage.getItem('authToken');
+  // Check if the user is logged in and set the user type
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    const storedUserType = localStorage.getItem("userType");
+
+    if (token && storedUserType) {
+      setIsLoggedIn(true);
+      setUserType(storedUserType);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, []); // Empty dependency array to run only once on mount
 
   // Handle logout
   const handleLogout = () => {
     localStorage.removeItem('authToken');
     localStorage.removeItem('user');
-    window.location.href = '/login'; // Redirect to login page after logout
+    localStorage.removeItem('userType');
+    setIsLoggedIn(false);  // Manually update state to force re-render
+    navigate('/login');    // Redirect to login page
   };
 
-   //const userData = JSON.parse(localStorage.getItem('user'))
-  console.log(localStorage.getItem('user'));
-  let route = "/student/dashboard";
-  // if(userData.userType === "college"){
-  //   route = "/college/dashboard";
-  // }
-  // else if(userData.userType === "student"){
-  //   route = "/student/dashboard";
-  // }
+  // Define the route based on userType
+  const route = userType === 'college' ? '/college/dashboard' : '/student/dashboard';
 
   return (
     <header className="header-container">
-      {/* Logo Section */}
       <div className="logo">
         <img src={logo} alt="Logo" className="logo-img" />
+        <h1 className="logo-title"><Link to="/" className='logo-title'>HAPPENING HUB</Link></h1>
       </div>
+      
 
-      {/* Navigation Links */}
       <nav className="nav-links">
         <Link to="/" className="nav-link">Home</Link>
-        <Link to="/events" className='nav-link'>Events</Link>
+        <Link to="/events" className="nav-link">Events</Link>
         <Link to="/about-us" className="nav-link">About Us</Link>
         <Link to="/contact-us" className="nav-link">Contact Us</Link>
 

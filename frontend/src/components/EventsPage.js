@@ -70,9 +70,36 @@ const EventsPage = () => {
     return `${d.toLocaleDateString()} at ${d.toLocaleTimeString()}`;
   };
 
+  const handleRegister = async (eventId) => {
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+      navigate('/login');
+      return;
+    }
+
+    try {
+
+      // Save registration data to the backend
+      await axios.post('/api/student/register-event', {
+        eventId,
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      // After registration, redirect the student to the external registration link
+      const event = events.find((e) => e._id === eventId);
+      window.location.href = event.registrationLink;
+    } catch (err) {
+      console.error('Error during registration:', err.response || err.message);
+    setError(err.response?.data?.message || 'Failed to register for the event.');
+    }
+  };
+
   return (
     <div>
-      <h2>Explore Events</h2>
+      <h2 style={{textAlign:"center"}}>Explore Events</h2>
 
       {/* Error Message */}
       {error && <div className="error-message">{error}</div>}
@@ -134,6 +161,11 @@ const EventsPage = () => {
                   <strong>Category:</strong> {event.eventCategory} {/* Display the event category */}
                 </p>
                 {event.eventImage && <img src={event.eventImage} alt={event.eventName} />}
+                {event.registrationLink && (
+                  <button onClick={() => handleRegister(event._id)}>
+                    Register
+                  </button>
+                )}
               </li>
             ))}
           </ul>

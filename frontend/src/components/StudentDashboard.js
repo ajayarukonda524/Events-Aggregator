@@ -29,18 +29,18 @@ const StudentDashboard = () => {
   }, []);
   
 
-  if (!student) return <div>Loading profile...</div>;
+  if (!student) return <div className='loading'>Loading profile...</div>;
   
   return (
-    <div>
-      <h2>Your Dashboard</h2>
-      <div>
+    <div className='dashboard-container'>
+      <h2>{student.firstName} {student.lastName}'s Dashboard</h2>
+      <div className='profile-details'>
         <h3>Profile Details {student.firstName}</h3>
         <p>Email: {student.email}</p>
         <p>Username: {student.username}</p>
       </div>
 
-      <div>
+      <div className='registered-events'>
         <h3>Registered Events</h3>
         {events.length === 0 ? (
           <p>No events registered yet.</p>

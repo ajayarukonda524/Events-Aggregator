@@ -39,6 +39,14 @@ const eventSchema = new mongoose.Schema({
   eventImage: {
     type: String,  // This will store the file path of the uploaded image
     required: false  // Image is optional when creating an event
+  },
+  registrationLink: {
+    type: String,  // Registration link for the event
+    required: false,  // This field can be optional
+  },
+  participants: {
+    type: [mongoose.Schema.Types.ObjectId], // Assuming you're storing participants as ObjectIds
+    default: [] // Default value as an empty array
   }
 }, { timestamps: true });
 

@@ -1,8 +1,8 @@
 const express = require('express');
 const multer = require('multer');  // Import multer
 const Event = require('../models/Event');
+const User = require('../models/User');
 const authenticateToken = require('../middlewares/authMiddleware');
-
 
 const router = express.Router();
 
@@ -20,7 +20,7 @@ const upload = multer({ storage: storage });
 // POST route to create an event (College only)
 router.post('/events', authenticateToken, upload.single('image'), async (req, res) => {
   console.log(req.body);
-  const { eventName, description, date, time, location, eventCategory, event_id } = req.body;
+  const { eventName, description, date, time, location, eventCategory, event_id, registrationLink } = req.body;
   const collegeId = req.user._id;  
   const eventImage = req.file ? `/uploads/events/${req.file.filename}` : null;  // Image path
 
@@ -34,7 +34,8 @@ router.post('/events', authenticateToken, upload.single('image'), async (req, re
       eventCategory,  
       event_id, 
       college: collegeId, 
-      eventImage
+      eventImage,
+      registrationLink
     });
 
     await newEvent.save();

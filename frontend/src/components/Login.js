@@ -18,24 +18,28 @@ const Login = ({ userType, onLogin }) => {
     try {
       let response;
       if (userType === 'college') {
-        response = await axios.post('http://localhost:4000/api/auth/college/login', {
-          collegeName: formData.collegeName,
-          email: formData.email,
-          password: formData.password,
-          location: formData.location,
-        }, );
+        // College Login API Call
+        response = await axios.post('/api/auth/college/login', {
+          email: formData.email,  // Use formData.email
+          password: formData.password,  // Use formData.password
+        });
       } else {
-        response = await axios.post('http://localhost:4000/api/auth/student/login', {
-          email: formData.email,
-          password: formData.password,
+        // Student Login API Call
+        response = await axios.post('/api/auth/student/login', {
+          email: formData.email,  // Use formData.email
+          password: formData.password,  // Use formData.password
         });
       }
 
       if (response.status === 200) {
-        alert(`${userType === 'college' ? 'College' : 'Student'} logged in successfully`);
+        const { authToken, user } = response.data;
 
-        // Save the token in localStorage or state if necessary
-        localStorage.setItem('authToken', response.data.token);
+        // Store both authToken and userType separately in localStorage
+        localStorage.setItem('authToken', authToken); // Store token
+        localStorage.setItem('userType', user.userType); // Store userType
+
+        console.log('Stored authToken:', localStorage.getItem('authToken'));
+        console.log('Stored userType:', localStorage.getItem('userType'));
 
         // Call onLogin function to handle state update (perhaps storing JWT or user details)
         onLogin(response.data);
@@ -43,7 +47,7 @@ const Login = ({ userType, onLogin }) => {
         // Redirect to the appropriate dashboard after login
         if (userType === 'college') {
           navigate('/college/dashboard');  // College dashboard route
-        } else if(userType === 'student') {
+        } else {
           navigate('/student/dashboard');  // Student dashboard route
         }
       }

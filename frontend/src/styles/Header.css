@@ -10,12 +10,23 @@
 
 /* Styling for the logo */
 .logo {
-  flex: 1;
+  display: flex;
+  align-items: center;
 }
 
 .logo-img {
-  height: 50px; /* Adjust the logo size */
-  width: auto;
+  width: 40px;
+  height: auto; /* Adjust the logo size */
+  margin-right: 10px;
+}
+
+.logo-title {
+  color: white; 
+  text-decoration: none;
+  font-size: 24px;  /* Adjust font size */
+  font-weight: bold; 
+  font-family: Verdana, sans-serif;
+  margin: 0;
 }
 
 /* Styling for the search container */
@@ -38,6 +49,7 @@
   gap: 20px; /* Space between each link */
   flex: 3;
   justify-content: flex-end;
+  align-items: center;
 }
 
 .nav-link {

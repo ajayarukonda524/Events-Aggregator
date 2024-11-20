@@ -16,7 +16,7 @@ const ContactUsPage = () => {
 
   return (
     <div className="contact-us-page">
-      <h1>Contact Us</h1>
+      <h1 className='contact'>Contact Us</h1>
       {submitted ? (
         <div className="thank-you-message">
           <h2>Thank you for reaching out!</h2>

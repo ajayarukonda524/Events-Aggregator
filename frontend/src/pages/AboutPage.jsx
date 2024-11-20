@@ -5,7 +5,7 @@ const AboutPage = () => {
     return (
         <div className="about-page">
             <h1>About Us</h1>
-            <p className="intro">Welcome to our Event Organizer Platform! We are dedicated to bringing together college events and helping you discover exciting opportunities.</p>
+            <p className="intro">Welcome to our Event Aggregator Platform! We are dedicated to bringing together college events and helping you discover exciting opportunities.</p>
             <div className="mission">
                 <h2>Our Mission</h2>
                 <p>Our mission is to create a vibrant community where students can easily find, participate in, and enjoy events that enhance their college experience.</p>

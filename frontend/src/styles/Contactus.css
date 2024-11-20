@@ -1,7 +1,13 @@
+.contact {
+  text-align: center;
+  color: #333;
+  padding: 20px;
+}
+
 .contact-us-page {
   padding: 20px;
   text-align: center;
-  color: #333; /* Adjust as needed */
+  color: #333; 
 }
 
 .thank-you-message {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import '../styles/CollegeDashboard.css';
 
 const CollegeDashboard = () => {
   const [college, setCollege] = useState(null);
@@ -12,6 +13,7 @@ const CollegeDashboard = () => {
     location: '',
     eventCategory: '',
     image: null, // New state for the image
+    registrationLink: '',
   });
   const [error, setError] = useState(null);
   const eventCategories = ['Hackathon', 'Sports Meet', 'Workshop', 'Seminar', 'Technical Fest'];
@@ -53,6 +55,7 @@ const CollegeDashboard = () => {
     formData.append('time', newEvent.time);
     formData.append('location', newEvent.location);
     formData.append('eventCategory', newEvent.eventCategory);
+    formData.append('registrationLink', newEvent.registrationLink);
     if (newEvent.image) formData.append('image', newEvent.image); // Append image if present
 
     console.log('FormData fields:');
@@ -77,6 +80,8 @@ const CollegeDashboard = () => {
           date: '',
           time: '',
           location: '',
+          eventCategory: '',
+          registrationLink: '',
           image: null, // Reset image state
         });
         alert('Event posted successfully');
@@ -114,17 +119,17 @@ const CollegeDashboard = () => {
   if (!college) return <div>Loading profile...</div>;
 
   return (
-    <div>
-      <h2>Your Dashboard</h2>
-      <div>
+    <div className='dashboard-container'>
+      <h2>{college.collegeName}'s Dashboard</h2>
+      <div className='profile-details'>
         <h3>Profile Details</h3>
         <p>Email: {college.email}</p>
         <p>Location: {college.location}</p>
       </div>
 
-      <div>
+      <div className='manage-events'>
         <h3>Manage Events</h3>
-        <h4>Post a New Event</h4>
+        <h3>Post a New Event :</h3>
         {/* Display error if posting fails */}
         {error && <div className="error-message">{error}</div>}
 
@@ -178,10 +183,17 @@ const CollegeDashboard = () => {
             accept="image/*"
             onChange={handleImageChange}
           />
+
+          <input
+            type="text"
+            placeholder="Registration Link"
+            value={newEvent.registrationLink}
+            onChange={(e) => setNewEvent({ ...newEvent, registrationLink: e.target.value })}
+          />
           <button type="submit">Post Event</button>
         </form>
 
-        <h4>Existing Events</h4>
+        <h4 className='event-list'>Existing Events</h4>
         <ul>
           {events.map(event => (
             <li key={event._id}>
