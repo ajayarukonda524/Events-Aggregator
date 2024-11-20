@@ -1,38 +1,57 @@
-.footer {
-  background-color: #3f51b5; /* Deep purple background */
+/* Style for the EventPage */
+.events-page {
+  padding: 20px;
+}
+
+.search-bar {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.search-bar input,
+.search-bar select,
+.search-bar button {
+  padding: 8px;
+  font-size: 1em;
+}
+
+.search-bar input,
+.search-bar select {
+  width: 200px;
+}
+
+.search-bar button {
+  cursor: pointer;
+  background-color: #007bff;
   color: white;
-  text-align: center;
-  padding: 10px 0; /* Small padding */
-  position: relative; /* Stay at the bottom without fixed positioning */
+  border: none;
+  border-radius: 4px;
 }
 
-.footer-content {
-  max-width: 1200px; /* Optional: limit the width for larger screens */
-  margin: 0 auto; /* Center the footer content */
+.search-bar button:hover {
+  background-color: #0056b3;
 }
 
-.footer p {
-  margin: 5px 0; /* Small margin for the copyright text */
+/* Style for the event cards */
+.event-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
 }
 
-.footer-links {
-  list-style: none; /* Remove bullet points */
-  padding: 0; /* Remove padding */
-  display: flex; /* Use flexbox for horizontal alignment */
-  justify-content: center; /* Center the links */
-  margin: 5px 0; /* Small margin for the link list */
+.event-card {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
 }
 
-.footer-links li {
-  margin: 0 10px; /* Space between links */
+.event-card h3 {
+  margin-top: 0;
 }
 
-.footer-links a {
-  color: white; /* Link color */
-  text-decoration: none; /* Remove underline */
-  transition: color 0.3s; /* Smooth transition for hover effect */
-}
-
-.footer-links a:hover {
-  color: #ff9800; /* Change color on hover */
+.event-card p {
+  margin: 5px 0;
 }

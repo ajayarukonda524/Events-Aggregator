@@ -1,3 +1,4 @@
+//eventdetails.js
 import React from 'react';
 import '../styles/EventDetails.css'; // Ensure you have appropriate styling
 

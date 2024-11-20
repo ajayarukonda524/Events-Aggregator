@@ -1,0 +1,75 @@
+/* eventsPage.css */
+.events-container {
+    margin-top: 20px;
+  }
+  
+  .event-item {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+  }
+  
+  .event-item h3 {
+    font-size: 1.5em;
+    color: #333;
+  }
+  
+  .event-item p {
+    margin: 5px 0;
+  }
+  
+  .event-item img {
+    max-width: 200px;
+    height: auto;
+    margin-top: 10px;
+  }
+  
+  .error-message {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  .filter-container {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: center; /* Centers the content horizontally */
+    align-items: center; /* Aligns the inputs vertically */
+    width: 100%; /* Ensures the container takes up the available width */
+  }
+  
+  .search-input,
+  .location-input {
+    padding: 10px;
+    font-size: 16px;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .search-input:focus,
+  .location-input:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  /* To center the entire filter container in the middle of the page */
+  .events-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centers the content vertically */
+    align-items: center; /* Centers the content horizontally */
+    height: 100vh; /* Makes the container take up the full viewport height */
+    padding: 20px;
+  }
+  h2{
+    text-align: left;
+    color: #333;
+  }
+  .category-select {
+    padding: 8px;
+    margin: 10px 0;
+    width: 200px;
+  }
+  

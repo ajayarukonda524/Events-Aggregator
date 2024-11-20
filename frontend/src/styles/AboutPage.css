@@ -16,6 +16,7 @@ h1 {
     font-size: 2.5em; /* Increase the font size */
     margin-bottom: 20px; /* Space below title */
     text-transform: uppercase; /* Uppercase letters */
+    color: #fff;
 }
 
 /* Section Styles */

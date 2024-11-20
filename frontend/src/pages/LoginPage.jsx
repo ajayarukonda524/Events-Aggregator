@@ -1,3 +1,4 @@
+//loginpage.js
 import React from 'react';
 import '../styles/Login.css';
 import backgroundImage from '../images/login_bg.jpg'; // Background image

@@ -1,35 +1,52 @@
-/* Header.css */
-
-.header {
-  display: flex; /* Use flexbox for layout */
-  justify-content: space-between; /* Space between logo and navigation */
-  align-items: center; /* Center items vertically */
-  background-color: #333; /* Dark background */
-  padding: 10px 20px; /* Padding around header */
-  color: white; /* Text color */
+/* Overall header container */
+.header-container {
+  display: flex;
+  justify-content: space-between; /* Spread out logo, search input, and nav links */
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #333; /* Change to your desired background color */
+  color: white;
 }
 
-.logo h1 {
-  margin: 0; /* Remove default margin */
+/* Styling for the logo */
+.logo {
+  flex: 1;
 }
 
-.nav ul {
-  list-style: none; /* Remove bullet points */
-  margin: 0; /* Remove default margin */
-  padding: 0; /* Remove default padding */
-  display: flex; /* Use flexbox for horizontal list */
+.logo-img {
+  height: 50px; /* Adjust the logo size */
+  width: auto;
 }
 
-.nav ul li {
-  margin: 0 15px; /* Space between list items */
+/* Styling for the search container */
+.search-container {
+  flex: 2;
+  display: flex;
+  justify-content: center;
 }
 
-.nav a {
-  color: white; /* Text color for links */
-  text-decoration: none; /* Remove underline */
-  font-weight: bold; /* Bold text */
+.search-input {
+  width: 80%; /* Adjust width as needed */
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
-.nav a:hover {
-  text-decoration: underline; /* Underline on hover */
+/* Styling for navigation links */
+.nav-links {
+  display: flex;
+  gap: 20px; /* Space between each link */
+  flex: 3;
+  justify-content: flex-end;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.nav-link:hover {
+  color: #ff9900; /* Change color on hover */
 }

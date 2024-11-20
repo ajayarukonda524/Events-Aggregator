@@ -1,3 +1,4 @@
+//home.js
 import React from 'react';
 // import Header from '../components/Header'; // Adjusted the path
 import Footer from '../components/Footer'; // Adjusted the path

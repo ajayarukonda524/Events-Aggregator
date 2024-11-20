@@ -64,4 +64,109 @@ button:hover {
   border-radius: 5px;
   margin: 10px 0;
 }
+/* App.css */
+
+/* Basic Layout */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Role Selection */
+.role-selection {
+  text-align: center;
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.role-selection h2 {
+  margin-bottom: 20px;
+}
+
+.role-btn {
+  background-color: #4caf50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 10px;
+  transition: background-color 0.3s;
+}
+
+.role-btn:hover {
+  background-color: #45a049;
+}
+
+/* Login and Signup */
+.login-container {
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+.login-btn {
+  background-color: #4caf50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+  transition: background-color 0.3s;
+}
+
+.login-btn:hover {
+  background-color: #45a049;
+}
+
+p {
+  text-align: center;
+}
+
+.link {
+  color: #4caf50;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.link:hover {
+  color: #45a049;
+}
 

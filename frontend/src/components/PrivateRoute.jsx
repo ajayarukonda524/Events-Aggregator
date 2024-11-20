@@ -1,4 +1,7 @@
+
+// privateroute.js
 import React from 'react';
+
 import { Navigate, Outlet } from 'react-router-dom';
 
 // This function could check for an authentication token, user role, etc.

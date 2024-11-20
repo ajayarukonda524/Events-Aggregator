@@ -18,7 +18,7 @@ const AboutPage = () => {
                 <h2>Meet the Team</h2>
                 <ul>
                     <li>Ajay Arukonda - Lead Developer</li>
-                    <li>Dara Lakshmi Prasanna - Community Manager</li>
+                    <li>Lakshmi Prasanna Dara - Community Manager</li>
                 </ul>
             </div>
         </div>
