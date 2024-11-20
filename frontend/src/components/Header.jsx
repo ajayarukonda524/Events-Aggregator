@@ -15,7 +15,7 @@ const Header = ({ setSearchTerm }) => {
     window.location.href = '/login'; // Redirect to login page after logout
   };
 
-  // const userData = JSON.parse(localStorage.getItem('user'))
+   //const userData = JSON.parse(localStorage.getItem('user'))
   console.log(localStorage.getItem('user'));
   let route = "/student/dashboard";
   // if(userData.userType === "college"){
