@@ -3,7 +3,7 @@ const express = require('express');
 const College = require('../models/College');
 const router = express.Router();
 
-// POST: Register a new college
+// Register a new college
 router.post('/', async (req, res) => {
   const { college_id, college_name, email, location, password_hash } = req.body;
   try {
@@ -22,7 +22,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// GET: Get all colleges
+// Get all colleges
 router.get('/', async (req, res) => {
   try {
     const colleges = await College.find();
@@ -32,7 +32,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET: Get a college by ID
+//  Get a college by ID
 router.get('/:collegeId', async (req, res) => {
   try {
     const college = await College.findById(req.params.collegeId);
@@ -45,7 +45,7 @@ router.get('/:collegeId', async (req, res) => {
   }
 });
 
-// PUT: Update a college
+// Update a college
 router.put('/:collegeId', async (req, res) => {
   try {
     const updatedCollege = await College.findByIdAndUpdate(
@@ -62,7 +62,7 @@ router.put('/:collegeId', async (req, res) => {
   }
 });
 
-// DELETE: Delete a college
+// Delete a college
 router.delete('/:collegeId', async (req, res) => {
   try {
     const deletedCollege = await College.findByIdAndDelete(req.params.collegeId);

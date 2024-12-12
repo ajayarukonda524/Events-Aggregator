@@ -1,85 +1,88 @@
-//home.js file
 import React from 'react';
 import { useNavigate } from 'react-router-dom';  // Import Link from react-router-dom
-import EventCard from './EventCard';  // Import EventCard component
 import '../styles/Home.css'; // Ensure the CSS path is correct
 
 const Home = () => {
   let navigate = useNavigate();
+
   const routeChange = () => {
     let path = "/login";
     navigate(path);
-  }
-  // Featured events data
-  const featuredEvents = [
+  };
+
+  // Dynamically Defined Features of the Event Aggregator
+  const features = [
     {
       id: 1,
-      title: 'Tech Hackathon 2024',
-      date: '2024-10-15',
-      description: 'Join us for a 48-hour hackathon where you can showcase your skills and win exciting prizes!',
-      image: require('../images/hackthon.jpg'),
+      title: 'Event Discovery',
+      description: 'Find and explore the latest hackathons, workshops, cultural events, and more.',
+      image: require('../images/discover.jpg'), // replace with actual image paths
     },
     {
       id: 2,
-      title: 'Cultural Fest 2024',
-      date: '2024-11-20',
-      description: 'Experience the diverse cultures at our annual cultural fest with performances, food, and workshops.',
-      image: require('../images/culturalfest.jpg'),
+      title: 'Easy Registration',
+      description: 'Quickly register for events with a simple and user-friendly interface.',
+      image: require('../images/regestration.jpg'),
     },
-    {
-      id: 3,
-      title: 'Robotics AI',
-      date: '2024-12-05',
-      description: 'Join us for a workshop on Artificial Intelligence and learn how to build AI models.',
-      image: require('../images/robotics.jpeg'),
-    },
-    {
-      id: 4,
-      title: 'Startup 2024',
-      date: '2024-12-15',
-      description: 'Participate in the most exciting technical fest with coding challenges, robotics, and more!',
-      image: require('../images/startup.jpg'),
-    },
-    {
-      id: 5,
-      title: 'Health Campaign',
-      date: '2024-12-22',
-      description: 'Cheer for your favorite teams in our annual sports meet with a variety of events.',
-      image: require('../images/Health.jpg'),
-    },
+     {
+          id: 3,
+          title: 'Student Registered events history',
+          description: 'We can see the events in the students dashboard.',
+          image: require('../images/studenthistory.jpg'),
+     },
+    // {
+    //   id: 4,
+    //   title: 'Event Updates',
+    //   description: 'Stay updated with real-time changes and announcements for your events.',
+    //   //image: require('../images/updates.jpg'),
+    // },
+    // {
+    //   id: 5,
+    //   title: 'Networking Opportunities',
+    //   description: 'Meet like-minded people and connect with event participants and organizers.',
+    //   //image: require('../images/networking.jpg'),
+    // },
     {
       id: 6,
-      title: 'Digital Marketing',
-      date: '2024-12-30',
-      description: 'Learn about the future of blockchain technology in this exclusive seminar.',
-      image: require('../images/digitalmarketing.jpeg'),
+      title: 'Multimedia Integration',
+      description: 'View event photos, videos, and other media to get a full event experience.',
+      image: require('../images/multimedia.jpg'),
     },
   ];
 
   return (
     <div className="home">
-      <h1 id='title'>Welcome to Happening Hub</h1>
+      <h1 id="title">Welcome to Events Aggregator</h1>
 
-      {/* Featured Events Section */}
-      <div className="featured-events">
-        <h2>Upcoming Events</h2>
-        <div className="event-cards">
-          {featuredEvents.map(event => (
-            <EventCard 
-              key={event.id}
-              title={event.title}
-              date={event.date}
-              description={event.description}
-              image={event.image}
-            />
-          ))}
-        </div>
+      {/* Intro Section */}
+      <div className="intro-section">
+        <h2>Explore the Features of our Events Aggregator</h2>
+        <p>Discover, register, and participate in events with ease. Here’s what we offer:</p>
+      </div>
+
+      {/* Features Section */}
+      <div className="features-section">
+        <h2>Platform Features</h2>
+        {features.map((feature, index) => (
+          <div
+            key={feature.id}
+            className={`feature-card ${index % 2 === 0 ? 'left' : 'right'}`} // Alternate left and right layout
+          >
+            <div className="feature-image-container">
+              <img src={feature.image} alt={feature.title} className="feature-image" />
+            </div>
+            <div className="feature-content">
+              <h3>{feature.title}</h3>
+              <p>{feature.description}</p>
+            </div>
+          </div>
+        ))}
       </div>
 
       {/* Call-to-Action Section */}
       <div className="call-to-action">
-        <h3>Don't Miss Out!</h3>
-        <p>Register now to participate in these exciting events and more!</p>
+        <h3>Ready to Join the Fun?</h3>
+        <p>Register now and be a part of these amazing events!</p>
         <button className="register-button" onClick={routeChange}>Register Now</button>
       </div>
     </div>

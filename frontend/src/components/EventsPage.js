@@ -1,27 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // For redirection
+import { useNavigate } from 'react-router-dom'; 
 import '../styles/eventsPage.css';
 
 const EventsPage = () => {
   const [events, setEvents] = useState([]);
-  const [filteredEvents, setFilteredEvents] = useState([]); // For filtered events
-  const [error, setError] = useState(null); // For error handling
-  const [loading, setLoading] = useState(true); // Loading state
-  const [searchQuery, setSearchQuery] = useState(''); // For search input
-  const [filterLocation, setFilterLocation] = useState(''); // For location filter
- // const [eventCategory, setEventCategory] = useState('');
-  const [filterCategory, setFilterCategory] = useState(''); // For category filter
-  const navigate = useNavigate(); // To redirect to login if not authenticated
+  const [filteredEvents, setFilteredEvents] = useState([]); 
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true); 
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filterLocation, setFilterLocation] = useState(''); 
+  const [filterCategory, setFilterCategory] = useState(''); 
+  const navigate = useNavigate(); 
 
-  // Event categories (adjust this as per your requirements)
+  
   const eventCategories = ['Hackathon', 'Sports Meet', 'Workshop', 'Seminar', 'Technical Fest'];
 
   useEffect(() => {
     const fetchEvents = async () => {
       const token = localStorage.getItem('authToken');
       if (!token) {
-        navigate('/login'); // Redirect to login if the user is not logged in
+        navigate('/login'); 
         return;
       }
 
@@ -32,20 +31,20 @@ const EventsPage = () => {
           },
         });
         console.log('API Response:', response.data);
-        setEvents(response.data); // Set events data
-        setFilteredEvents(response.data); // Initialize filtered events
+        setEvents(response.data); 
+        setFilteredEvents(response.data); 
       } catch (err) {
         setError('Failed to fetch events.');
         console.error('Error fetching events:', err);
       } finally {
-        setLoading(false); // Set loading to false once the fetch is complete
+        setLoading(false); 
       }
     };
 
     fetchEvents();
   }, [navigate]);
 
-  // Filter logic
+  
   useEffect(() => {
     const filtered = events.filter((event) => {
       const eventNameMatches =
@@ -64,7 +63,7 @@ const EventsPage = () => {
     setFilteredEvents(filtered);
   }, [searchQuery, filterLocation, filterCategory, events]);
   
-  // Helper function to format the date
+ 
   const formatDate = (date) => {
     const d = new Date(date);
     return `${d.toLocaleDateString()} at ${d.toLocaleTimeString()}`;
@@ -79,7 +78,7 @@ const EventsPage = () => {
 
     try {
 
-      // Save registration data to the backend
+      
       await axios.post('/api/student/register-event', {
         eventId,
       }, {
@@ -88,7 +87,7 @@ const EventsPage = () => {
         },
       });
 
-      // After registration, redirect the student to the external registration link
+      
       const event = events.find((e) => e._id === eventId);
       window.location.href = event.registrationLink;
     } catch (err) {
@@ -97,17 +96,19 @@ const EventsPage = () => {
     }
   };
 
+  const userType = localStorage.getItem('userType');;
+
   return (
     <div>
       <h2 style={{textAlign:"center"}}>Explore Events</h2>
 
-      {/* Error Message */}
+      
       {error && <div className="error-message">{error}</div>}
 
-      {/* Loading Indicator */}
+      
       {loading && <div className="loading-message">Loading events...</div>}
 
-      {/* Search and Filter Section */}
+      
       <div className="filter-container">
         <input
           type="text"
@@ -123,7 +124,7 @@ const EventsPage = () => {
           onChange={(e) => setFilterLocation(e.target.value)}
           className="location-input"
         />
-        {/* Event Category Dropdown */}
+        
         <select
           value={filterCategory}
           onChange={(e) => setFilterCategory(e.target.value)}
@@ -138,7 +139,7 @@ const EventsPage = () => {
         </select>
       </div>
 
-      {/* Event List */}
+      
       <div className="events-container">
         {filteredEvents.length === 0 ? (
           <p>No events available for the selected criteria.</p>
@@ -149,19 +150,19 @@ const EventsPage = () => {
                 <h3>{event.eventName}</h3>
                 <p>{event.description}</p>
                 <p>
-                  <strong>Date:</strong> {formatDate(event.date)} {/* Format the date */}
+                  <strong>Deadline Date:</strong> {formatDate(event.date)} 
                 </p>
                 <p>
-                  <strong>Time:</strong> {event.time}
+                  <strong>Deadline Time:</strong> {event.time}
                 </p>
                 <p>
                   <strong>Location:</strong> {event.location}
                 </p>
                 <p>
-                  <strong>Category:</strong> {event.eventCategory} {/* Display the event category */}
+                  <strong>Category:</strong> {event.eventCategory}
                 </p>
                 {event.eventImage && <img src={event.eventImage} alt={event.eventName} />}
-                {event.registrationLink && (
+                {event.registrationLink && (userType === 'student') && (
                   <button onClick={() => handleRegister(event._id)}>
                     Register
                   </button>

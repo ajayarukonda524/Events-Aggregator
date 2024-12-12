@@ -27,6 +27,26 @@ const StudentDashboard = () => {
       console.error('Token is missing');
     }
   }, []);
+
+  const handleDeleteEvent = (eventId) => {
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+      alert('You need to be logged in to delete events.');
+      return;
+    }
+
+    axios.delete(`/api/student/events/${eventId}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(response => {
+        setEvents(events.filter(event => event._id !== eventId));
+        alert('Event deleted successfully');
+      })
+      .catch(err => {
+        console.error('Error deleting event', err);
+        alert('Error deleting event');
+      });
+  };
   
 
   if (!student) return <div className='loading'>Loading profile...</div>;
@@ -35,7 +55,7 @@ const StudentDashboard = () => {
     <div className='dashboard-container'>
       <h2>{student.firstName} {student.lastName}'s Dashboard</h2>
       <div className='profile-details'>
-        <h3>Profile Details {student.firstName}</h3>
+        <h3>Profile Details</h3>
         <p>Email: {student.email}</p>
         <p>Username: {student.username}</p>
       </div>
@@ -49,6 +69,7 @@ const StudentDashboard = () => {
             {events.map(event => (
               <li key={event._id}>
                 {event.eventName} - {event.date} at {event.time}
+                <button onClick={() => handleDeleteEvent(event._id)}>Delete</button>
               </li>
             ))}
           </ul>

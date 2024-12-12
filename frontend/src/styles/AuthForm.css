@@ -160,3 +160,42 @@
 .college-student-btn:active {
   background-color: #3e8e41;
 }
+
+.password-input {
+  position: relative;
+  width: 100%;
+  margin-bottom: 1rem; /* Add spacing between fields */
+}
+
+.password-input input {
+  width: 100%;
+  padding: 12px;
+  padding-right: 40px; /* Reserve space for the toggle button */
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  transition: border color 0.3s;
+}
+
+.password-input input:focus {
+  outline: none;
+}
+
+.password-input .toggle-password {
+  position: absolute;
+  top: 30%;
+  right: 10px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 0; 
+  height: auto; 
+  width: auto; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+

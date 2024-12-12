@@ -10,6 +10,7 @@ const Event = require('./models/Event');
 const authMiddleware = require('./middlewares/authMiddleware');
 const eventRoutes = require('./routes/eventRoutes');
 const path = require('path');
+const nodemailer = require('nodemailer');
 require('dotenv').config();
 
 // Connect to MongoDB
@@ -24,20 +25,50 @@ app.use('/api', eventRoutes);
 app.use('/api/college', eventRoutes);
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/events', eventRoutes);
-app.use(express.json()); // Parse JSON request bodies
+app.use(express.json()); 
 
 
-// JWT Secret
 const JWT_SECRET = process.env.JWT_SECRET;
 
 // Helper function to generate JWT
 const generateToken = (userId, userType) => {
-  return jwt.sign({ id: userId, userType: userType }, JWT_SECRET, { expiresIn: '1h' });
+  return jwt.sign({ id: userId, userType: userType }, JWT_SECRET, { expiresIn: '3h' });
+};
+
+const validatePassword = (password) => {
+    const errors = [];
+
+    if (password.length < 8) {
+        errors.push('Password must be at least 8 characters long.');
+    }
+    if (!/[A-Z]/.test(password)) {
+        errors.push('Password must include at least one uppercase letter.');
+    }
+    if (!/[a-z]/.test(password)) {
+        errors.push('Password must include at least one lowercase letter.');
+    }
+    if (!/\d/.test(password)) {
+        errors.push('Password must include at least one number.');
+    }
+    if (!/[@$!%*?&#]/.test(password)) {
+        errors.push('Password must include at least one special character.');
+    }
+    if (/\s/.test(password)) {
+        errors.push('Password must not contain spaces.');
+    }
+
+    return errors;
 };
 
 // Signup route for students
 app.post('/api/auth/student/signup', async (req, res) => {
   const { firstName, lastName, email, username, password } = req.body;
+
+  const validationErrors = validatePassword(password);
+
+    if (validationErrors.length > 0) {
+        return res.status(400).json({ errors: validationErrors });
+    }
   
   const existingUser = await Student.findOne({ email });
   if (existingUser) {
@@ -65,7 +96,13 @@ app.post('/api/auth/college/signup', async (req, res) => {
   if (!collegeName || collegeName.trim() === '') {
     return res.status(400).json({ message: 'College name is required and cannot be empty.' });
   }
-  
+
+  const validationErrors = validatePassword(password);
+
+  if (validationErrors.length > 0) {
+      return res.status(400).json({ errors: validationErrors });
+  }
+
   
   const existingCollege = await College.findOne({ email });
   if (existingCollege) {
@@ -148,26 +185,26 @@ app.post('/api/auth/college/login', async (req, res) => {
 
 // Fetch student profile details
 app.get('/api/student/profile', authMiddleware, async (req, res) => {
-  res.json(req.user);  // `req.user` will contain the student data
+  res.json(req.user);  
 });
 
 // Fetch college profile details
 app.get('/api/college/profile', authMiddleware, async (req, res) => {
-  res.json(req.user);  // `req.user` will contain the college data
+  res.json(req.user); 
 });
 
 app.get('/api/student/events', authMiddleware, async (req, res) => {
   try {
     const studentId = req.user.id;
-    console.log('Student ID:', studentId);  // Log the studentId for debugging
+    console.log('Student ID:', studentId); 
     
     if (!studentId) {
       return res.status(400).json({ message: 'Student ID is missing in the request' });
     }
 
-    // Fetch events where the student is in the participants array, excluding null or undefined values
+
     const events = await Event.find({ participants: { $in: [studentId] } })
-      .where('participants').ne(null);  // Ensure null is excluded from the participants array
+      .where('participants').ne(null);  
 
     if (!events || events.length === 0) {
       return res.status(400).json({ message: 'No events found for this student' });
@@ -180,28 +217,38 @@ app.get('/api/student/events', authMiddleware, async (req, res) => {
   }
 });
 
-// Post a new event
-app.post('/api/college/events', authMiddleware, async (req, res) => {
-  const collegeId = req.user.id;
-  const { eventName, description, date, time, location, eventCategory, event_id } = req.body;
+app.get('/api/college/events', authMiddleware, async (req, res) => {
+  try {
+    const events = await Event.find({ college: req.user._id }); // Query events by college ID
+    res.status(200).json(events);
+  } catch (error) {
+    console.error('Error fetching events:', error);
+    res.status(500).json({ message: 'Could not fetch events.' });
+  }
+})
+
+
+// app.post('/api/college/events', authMiddleware, async (req, res) => {
+//   const collegeId = req.user.id;
+//   const { eventName, description, date, time, location, eventCategory, event_id } = req.body;
   
-  const newEvent = new Event({
-    eventName,
-    description,
-    date,
-    time,
-    location,
-    eventCategory,
-    collegeId,
-    event_id,
-    participants: []
-  });
+//   const newEvent = new Event({
+//     eventName,
+//     description,
+//     date,
+//     time,
+//     location,
+//     eventCategory,
+//     collegeId,
+//     event_id,
+//     participants: [],
+//   });
 
-  await newEvent.save();
-  res.status(201).json({ message: 'Event posted successfully', event: newEvent });
-});
+//   await newEvent.save();
 
-// Modify an event
+//   res.status(201).json({ message: 'Event posted successfully', event: newEvent });
+// });
+
 app.put('/api/college/events/:eventId', authMiddleware, async (req, res) => {
   const { eventId } = req.params;
   const { eventName, description, date, time, location, eventCategory, event_id } = req.body;
@@ -215,7 +262,7 @@ app.put('/api/college/events/:eventId', authMiddleware, async (req, res) => {
   res.json({ message: 'Event updated successfully', event });
 });
 
-// Delete an event
+
 app.delete('/api/college/events/:eventId', authMiddleware, async (req, res) => {
   const { eventId } = req.params;
 
@@ -228,6 +275,19 @@ app.delete('/api/college/events/:eventId', authMiddleware, async (req, res) => {
   res.json({ message: 'Event deleted successfully' });
 });
 
+app.delete('/api/student/events/:eventId', authMiddleware, async (req, res) => {
+  const { eventId } = req.params;
+
+  const event = await Event.findByIdAndDelete(eventId);
+
+  if (!event) {
+    return res.status(400).json({ message: 'Event not found' });
+  }
+
+  res.json({ message: 'Event deleted successfully' });
+});
+
+
 app.post('/api/student/register-event', async (req, res) => {
   console.log('Received request for event registration');
   try {
@@ -239,26 +299,22 @@ app.post('/api/student/register-event', async (req, res) => {
       return res.status(401).json({ message: 'Authorization token missing' });
     }
 
-    // Decode the token to get student ID
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const studentId = decoded.id;
     console.log('Decoded token:', decoded);
     console.log('Student ID:', studentId);
 
-    // Find the event in the database using async/await
     const event = await Event.findById(eventId);
     if (!event) {
       return res.status(404).json({ message: 'Event not found' });
     }
     console.log('Found event:', event.eventName);
 
-    // Ensure participants is a valid array and exclude invalid values
     if (!Array.isArray(event.participants)) {
       event.participants = [];
     }
-    event.participants = event.participants.filter((p) => p); // Remove null/undefined
+    event.participants = event.participants.filter((p) => p); 
 
-    // Add student ID to participants if not already present
     if (studentId && !event.participants.includes(studentId)) {
       event.participants.push(studentId);
       console.log('Added participant:', studentId);
@@ -274,8 +330,42 @@ app.post('/api/student/register-event', async (req, res) => {
   }
 });
 
+app.post('/send-email', async (req, res) => {
+  const { name, email, message } = req.body;
 
-// Start the server
+  if (!name || !email || !message) {
+    return res.status(400).send({ message: 'All fields are required.' });
+  }
+
+  // Nodemailer transporter setup
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'ajayarukonda524@gmail.com', 
+      pass: 'wuda lile cajc mrrz',
+    },
+  });
+
+  const mailOptions = {
+    from: email,
+    to: 'ajayarukonda524@gmail.com', 
+    subject: `New Contact Form Submission from ${name}`,
+    text: `You have received a new message from the contact form:
+    
+    Name: ${name}
+    Email: ${email}
+    Message: ${message}`,
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    res.status(200).send({ message: 'Email sent successfully.' });
+  } catch (error) {
+    console.error('Error sending email:', error);
+    res.status(500).send({ message: 'Failed to send email.' });
+  }
+});
+
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

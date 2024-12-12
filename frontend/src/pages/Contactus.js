@@ -1,22 +1,39 @@
-//contactus file
 import React, { useState } from 'react';
-import '../styles/Contactus.css'; // Ensure this CSS file path is correct
+import '../styles/Contactus.css';
 
 const ContactUsPage = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({ name, email, message });
-    setSubmitted(true);
+    try {
+      const response = await fetch('http://localhost:4000/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email, message }),
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+      } else {
+        const errorData = await response.json();
+        setError(errorData.message || 'Failed to send email.');
+      }
+    } catch (err) {
+      setError('An error occurred. Please try again.');
+      console.error(err);
+    }
   };
 
   return (
     <div className="contact-us-page">
-      <h1 className='contact'>Contact Us</h1>
+      <h1 className="contact">Contact Us</h1>
       {submitted ? (
         <div className="thank-you-message">
           <h2>Thank you for reaching out!</h2>
@@ -55,6 +72,8 @@ const ContactUsPage = () => {
               required
             />
           </div>
+
+          {error && <p className="error-message">{error}</p>}
 
           <button type="submit">Submit</button>
         </form>

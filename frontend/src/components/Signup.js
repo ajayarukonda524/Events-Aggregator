@@ -12,9 +12,20 @@ const Signup = ({ userType, onSignup }) => {
     firstName: '',
     lastName: '',
   });
+  const [errors, setErrors] = useState([]);
+  const [passwordVisible, setPasswordVisible] = useState(false);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const togglePasswordVisibility = () => {
+    setPasswordVisible((prevState) => !prevState);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrors([]);
 
     try {
       let response;
@@ -42,8 +53,13 @@ const Signup = ({ userType, onSignup }) => {
         window.location.href = '/login';
       }
     } catch (error) {
-      console.error('Signup Error:', error.response ? error.response.data : error.message);
-      alert('Error signing up');
+        if (error.response && error.response.data.errors) {
+        // Display validation errors from the backend
+          setErrors(error.response.data.errors);
+        } else {
+          console.error('Signup Error:', error.response ? error.response.data : error.message);
+          alert('Error signing up');
+        }
     }
   };
 
@@ -68,9 +84,29 @@ const Signup = ({ userType, onSignup }) => {
       <form onSubmit={handleSubmit}>
         {renderFormFields()}
         <input type="email" placeholder="Email" onChange={(e) => setFormData({ ...formData, email: e.target.value })} required />
-        <input type="password" placeholder="Password" onChange={(e) => setFormData({ ...formData, password: e.target.value })} required />
+        <div className='password-input'>
+          <input type={passwordVisible ? 'text' : 'password'} placeholder="Password" onChange={handleChange} required />
+          <button
+            type="button"
+            className="toggle-password"
+            onClick={togglePasswordVisibility}
+            aria-label="Toggle password visibility"
+          >
+            {passwordVisible ? '👁️' : '👁️‍🗨️'}
+          </button>
+        </div>
         <button type="submit">Sign Up</button>
       </form>
+      {errors.length > 0 && (
+                <div style={{ color: 'red' }}>
+                    <h4>Weak Password:</h4>
+                    <ul>
+                        {errors.map((error, index) => (
+                            <li key={index}>{error}</li>
+                        ))}
+                    </ul>
+                </div>
+            )}
     </div>
   );
 };

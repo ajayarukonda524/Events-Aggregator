@@ -10,6 +10,11 @@ const Login = ({ userType, onLogin }) => {
   });
   const [error, setError] = useState(null);  // State to handle error messages
   const navigate = useNavigate();  // Initialize useNavigate
+  const [passwordVisible, setPasswordVisible] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setPasswordVisible((prevState) => !prevState);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -72,13 +77,23 @@ const Login = ({ userType, onLogin }) => {
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
           required
         />
+        <div className='password-input'>
         <input
-          type="password"
+          type={passwordVisible ? 'text' : 'password'}
           placeholder="Password"
           value={formData.password}
           onChange={(e) => setFormData({ ...formData, password: e.target.value })}
           required
         />
+        <button
+            type="button"
+            className="toggle-password"
+            onClick={togglePasswordVisibility}
+            aria-label="Toggle password visibility"
+          >
+            {passwordVisible ? '👁️' : '👁️‍🗨️'}
+          </button>
+        </div>
         <button type="submit">Log In</button>
       </form>
     </div>
