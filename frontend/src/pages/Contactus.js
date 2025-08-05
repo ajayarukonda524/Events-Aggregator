@@ -11,7 +11,7 @@ const ContactUsPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:4000/send-email', {
+      const response = await fetch('https://events-aggregator-webservice.onrender.com/send-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
