@@ -23,14 +23,14 @@ const CollegeDashboard = () => {
     
     if (token) {
       // Fetch college profile details
-      axios.get('/api/college/profile', {
+      axios.get('https://events-aggregator-webservice.onrender.com/api/college/profile', {
         headers: { Authorization: `Bearer ${token}` }
       })
         .then(response => setCollege(response.data))
         .catch(err => console.error('Error fetching college profile', err));
 
       // Fetch college events
-      axios.get('/api/college/events', {
+      axios.get('https://events-aggregator-webservice.onrender.com/api/college/events', {
         headers: { Authorization: `Bearer ${token}` }
       })
         .then(response => setEvents(response.data))
@@ -66,7 +66,7 @@ const CollegeDashboard = () => {
 
   });
 
-    axios.post('/api/college/events', formData, {
+    axios.post('https://events-aggregator-webservice.onrender.com/api/college/events', formData, {
       headers: {
         'Content-Type': 'multipart/form-data', // Important for file uploads
         Authorization: `Bearer ${token}`
@@ -99,7 +99,7 @@ const CollegeDashboard = () => {
       return;
     }
 
-    axios.delete(`/api/college/events/${eventId}`, {
+    axios.delete(`https://events-aggregator-webservice.onrender.com/api/college/events/${eventId}`, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
