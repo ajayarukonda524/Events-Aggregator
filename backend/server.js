@@ -20,6 +20,7 @@ mongoose.connect(process.env.MONGODB_URI)
 
 const app = express();
 app.use(cors());
+app.use(cors({ origin: "https://events-aggregator.onrender.com", credentials: true }));
 app.use(bodyParser.json());
 app.use('/api', eventRoutes);
 app.use('/api/college', eventRoutes);
