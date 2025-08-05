@@ -30,14 +30,14 @@ const Signup = ({ userType, onSignup }) => {
     try {
       let response;
       if (userType === 'college') {
-        response = await axios.post('http://localhost:4000/api/auth/college/signup', {
+        response = await axios.post('https://events-aggregator-webservice.onrender.com/api/auth/college/signup', {
           collegeName: formData.collegeName,
           email: formData.email,
           password: formData.password,
           location: formData.location,
         });
       } else {
-        response = await axios.post('http://localhost:4000/api/auth/student/signup', {
+        response = await axios.post('https://events-aggregator-webservice.onrender.com/api/auth/student/signup', {
           firstName: formData.firstName,
           lastName: formData.lastName,
           email: formData.email,
