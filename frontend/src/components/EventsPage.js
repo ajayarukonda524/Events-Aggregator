@@ -25,7 +25,7 @@ const EventsPage = () => {
       }
 
       try {
-        const response = await axios.get('/api/events/all', {
+        const response = await axios.get('https://events-aggregator-webservice.onrender.com/api/events/all', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -79,7 +79,7 @@ const EventsPage = () => {
     try {
 
       
-      await axios.post('/api/student/register-event', {
+      await axios.post('https://events-aggregator-webservice.onrender.com/api/student/register-event', {
         eventId,
       }, {
         headers: {
