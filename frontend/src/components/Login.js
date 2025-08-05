@@ -24,13 +24,13 @@ const Login = ({ userType, onLogin }) => {
       let response;
       if (userType === 'college') {
         // College Login API Call
-        response = await axios.post('/api/auth/college/login', {
+        response = await axios.post('https://events-aggregator-webservice.onrender.com/api/auth/college/login', {
           email: formData.email,  // Use formData.email
           password: formData.password,  // Use formData.password
         });
       } else {
         // Student Login API Call
-        response = await axios.post('/api/auth/student/login', {
+        response = await axios.post('https://events-aggregator-webservice.onrender.com/api/auth/student/login', {
           email: formData.email,  // Use formData.email
           password: formData.password,  // Use formData.password
         });
