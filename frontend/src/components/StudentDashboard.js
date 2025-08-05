@@ -11,14 +11,14 @@ const StudentDashboard = () => {
     
     if (token) {
       // Fetch student profile details
-      axios.get('/api/student/profile', {
+      axios.get('https://events-aggregator-webservice.onrender.com/api/student/profile', {
         headers: { Authorization: `Bearer ${token}` }
       })
         .then(response => setStudent(response.data))
         .catch(err => console.error('Error fetching student profile', err));
   
       // Fetch student events
-      axios.get('/api/student/events', {
+      axios.get('https://events-aggregator-webservice.onrender.com/api/student/events', {
         headers: { Authorization: `Bearer ${token}` }
       })
         .then(response => setEvents(response.data))
@@ -35,7 +35,7 @@ const StudentDashboard = () => {
       return;
     }
 
-    axios.delete(`/api/student/events/${eventId}`, {
+    axios.delete(`https://events-aggregator-webservice.onrender.com/api/student/events/${eventId}`, {
       headers: { Authorization: `Bearer ${token}` }
     })
       .then(response => {
