@@ -5,7 +5,7 @@ import '../styles/EventDetails.css'; // Ensure you have appropriate styling
 const EventDetails = ({ event }) => {
   return (
     <div className="event-details">
-      <img src={`https://events-aggregator-webservice.onrender.com/${event.image}`} alt={event.title} className="event-image" />
+      <img src={`https://events-aggregator-webservice.onrender.com${event.image}`} alt={event.title} className="event-image" />
       <h2>{event.title}</h2>
       <p><strong>Date:</strong> {event.date}</p>
       <p><strong>Time:</strong> {event.time}</p>
