@@ -85,7 +85,7 @@ const Signup = ({ userType, onSignup }) => {
         {renderFormFields()}
         <input type="email" placeholder="Email" onChange={(e) => setFormData({ ...formData, email: e.target.value })} required />
         <div className='password-input'>
-          <input type={passwordVisible ? 'text' : 'password'} placeholder="Password" onChange={handleChange} required />
+          <input type={passwordVisible ? 'text' : 'password'} name="password" placeholder="Password" onChange={handleChange} required />
           <button
             type="button"
             className="toggle-password"
