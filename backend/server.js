@@ -22,9 +22,9 @@ const app = express();
 app.use(cors());
 app.use(cors({ origin: "https://events-aggregator.onrender.com", credentials: true }));
 app.use(bodyParser.json());
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/api', eventRoutes);
 app.use('/api/college', eventRoutes);
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/events', eventRoutes);
 app.use(express.json()); 
 
